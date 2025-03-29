@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+
+{% block title %}
+    Sign Up
+{% endblock %}
+
+
+{% block body %}
+    <div class="signupFlex">
+        <div class="signupLeftDiv">
+            <div>
+                <p>Live Classes</p>
+                <p>IELTS Preparation</p>
+                <p>Personal Tutoring</p>
+                <p>English Skills</p>
+                <p>Grammar</p>
+                <p>Vocabulary</p>
+                <p>Business English</p>
+                <p>Learning styles</p>
+                <p>English Levels</p>
+                <p>General English</p>
+                <p>Topics</p>
+                <p>Resources</p>
+            </div>
+        </div>
+        <div class="signupRightDiv">
+            <h3>Sign Up</h3>
+            <form action="/signup" method="post">
+                <div class="mb-3">
+                    <label for="namelb" class="form-label">Enter Name</label>
+                    <input type="text" class="form-control" id="namelb" name="name" autocomplete="off" autofocus class="form-control" >
+                </div>
+                <div class="mb-3">
+                    <label for="passwordlb" class="form-label">Create Password</label>
+                    <input type="password" class="form-control" id="passwordlb" name="password" autocomplete="off" autofocus class="form-control" >
+                </div>
+                <div class="mb-3">
+                    <label for="confirmpasswordlb" class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control" id="confirmpasswordlb" name="confirmpasswordlb" autocomplete="off" autofocus class="form-control" >
+                </div>
+                <button type="submit" class="btn btn-info">Sign Up</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+{% endblock %}

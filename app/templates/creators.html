@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Creators
+{% endblock %}
+
+{% block body %}
+<div class="postsPage">
+    {% for user in users %}
+        {% if user.id == current_user.id %}
+            <div class="posts">
+                <div>
+                    <img src="/static/images/personi.png"/>
+                </div>
+                <div>
+                    <div class="allcreator">
+                        <h6 class="highlight">
+                            @{{ user.username }}
+                            <span class="you-tag">You</span>
+                        </h6>
+                    </div>
+                </div>
+            </div>
+        {% elif is_admin %}
+            <div class="posts">
+                <div>
+                    <img src="/static/images/personi.png"/>
+                </div>
+                <div>
+                    <div class="allcreator">
+                        <h6>
+                            @{{ user.username }}
+                            {% if user.is_admin %}
+                                <span class="you-tag">Admin</span>
+                            {% endif %}
+
+                            {% if is_admin and user.id != current_user.id %}
+                                <form action="/delete_user/{{ user.id }}" method="post" style="display:inline;">
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            {% endif %}
+                        </h6>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+{% endblock %}
+

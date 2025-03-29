@@ -1,0 +1,156 @@
+Python Installation
+Venv - Virtual Environment Set up:
+    cd to project folder
+    Run: python -m venv venv
+Venv Activate:
+    .\venv\Scripts\activate
+Packages installation: pip install flask flask-sqlalchemy flask-session, flask_migrate, flask_bycrypt
+Set up the Folder Structure:
+        app: static, templates, __init__.py, models.py, routes.py
+        run.py
+        config.py
+        requirements.txt
+        blog.db(auto-generated)
+        venv(auto-generated)
+        flask_session(auto-generated)
+        migrations(auto-generated)
+Run App: 
+    .\venv\Scripts\activate
+    python run.py
+Database set up:
+    Activate venv
+    Set up/Configure __init__.py
+    Set the FLASK_APP Environment Variable: 
+        On cmd, Run: set FLASK_APP=run.py
+        On Powershell, Run: $env:FLASK_APP = "run.py"
+    Create models in models.py
+    Run: flask shell in terminal.
+    Inside the Flask shell, run: from app import db
+    Then run: db.create_all()
+    Quit flask shell Run: exit() or quit()
+    To Deactivate Venv Run: deactivate
+
+
+Migration - Run Database Migrations- Update models/column/table in database
+    Exit Virtual Environment : Run; deactivate
+    Update the Model in models.py
+    Reactivate Virtual Environment
+    Set the FLASK_APP Environment Variable: 
+        On cmd, Run: set FLASK_APP=run.py
+        On Powershell, Run: $env:FLASK_APP = "run.py"
+    Verify Your __init__.py Configuration: 
+        In __init.py__ add:
+            migrate = Migrate(app, db)
+            from app import routes, models
+    Generate a Migration Script - Run migration in venv; Run:
+        flask db init
+        flask db migrate -m "Add migrations comment"
+        flask db upgrade
+
+Sass Rerun: sass --watch app/static/scss:app/static/css
+
+Generating SECRET_KEY: Steps to Properly Manage Flask Secret Key:
+    1. Generate a Secure Key: In Venv, Run: python -c "import secrets; print(secrets.token_hex(24))" This will produce a secure key such as 09f823a6b9c923b2e9a7f6f2af3d5c76c3f45ef7c2e4
+
+    2. Create a .env file in the root folder. 
+    3. In the .env file, add:
+        SECRET_KEY=c7a82b43ad21450e9228f4fa3b75c482
+        SQLALCHEMY_DATABASE_URI=sqlite:///blogpost.db
+        SESSION_TYPE=filesystem
+        Save.
+    4. Install python-dotenv: Run: pip install python-dotenv
+    5. Load Environment Variables in _init_.py
+        In _init_.py, add:
+        from dotenv import load_dotenv
+        import os
+
+        load_dotenv()
+
+        app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+        app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
+        app.config['SESSION_TYPE'] = os.getenv('SESSION_TYPE')
+
+    6. Run app.
+
+
+Hosting on Pythoneverwhere
+    Be sure to generate a secret key to load enviroment variables using flask. Steps above.
+    Create a .gitignore file. Add: venv/ instance/ migrations/ __pycache__/ *.pyc *.pyo .env static/css/ static/js/ .flaskenv .vscode/ .idea/ flask_session/
+
+    1. Prepare App Structure for Deployment
+    2. Log in to PythonAnywhere.
+    3. Zip Project Folder to a .zip file.
+    4. Go to the Files tab.
+        In the root directory e.g /home/essietasha 
+        Upload zip Folder
+    5. Go to Console tab.
+        Close existing console. Create new Bash console.
+        Run cd (to navigate to root directory). 
+        Run unzip foldername.zip
+    6. After unzipping, cd into folder name. e.g cd Techive
+    7. Create a Virtual Environment. Activate it.
+        Run python3 -m venv venv
+        Run source venv/bin/activate
+
+    8. Run pip install flask
+       Run pip install -r requirements.txt
+    9. Go to Web. Add a new Web App.
+    10. WSGI Configuration:
+
+        import sys
+        import os
+
+        path = '/home/essietasha/Techive'
+        if path not in sys.path:
+            sys.path.append(path)
+        from run import app as application
+    11. Set the Working Directory and Source Code in Web App e.g /home/essietasha/Techive
+
+
+Key changes/not necessary:
+    Static/Template set up in __init__.py: 
+        app = Flask(__name__, static_folder="static", template_folder="templates")
+
+    For typing extension: In requirements.txt, update typing extensions to be: typing_extensions==4.12.2
+
+    Requirements.txt:
+        To Create requirements.txt: Run pip freeze > requirements.txt
+        To Install Dependencies: Run pip install -r requirements.txt
+
+
+STEPS To Recreate/Drop Database / Drop Tables Manually via Flask Shell
+    Drop All Tables
+        In venv: Run 
+            flask shell
+            from app import db
+            db.drop_all()
+
+    Recreate Database / If Using Flask Migrate
+    NOTE: Don't use shell for this
+        In venv: Run 
+            flask db migrate -m "Recreating the database"
+            flask db upgrade  ###### To Apply migrations
+
+            OR
+            In venv: Run  
+            flask shell
+            from app import db OR 
+            db.create_all()
+
+
+
+CSFR AND XSS Malware Attack Protection
+1. Enable CSRF (Cross-Site Request Forgery) Protection.
+2. Using WTForms for Form Validation
+3. Validating Inputs: Allow only alphnum characters. 
+        import re
+4. Sanitize Inputs (XSS Protection): Bleach. This will prevent any malicious scripts from being executed if the input contains any <script> or HTML tags.
+        python -m pip install bleach
+        import bleach
+4. Validating Passwords: Regex for Strong Password Validation.
+5. Password hashing: with libraries like werkzeug.security's generate_password_hash and check_password_hash.
+6. Setting your password input field as type="password" in HTML. 
+
+
+//Create admin.py Update db.
+    In venv: Run python admin.py

@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+
+{% block title %}
+    Home
+{% endblock %}
+
+
+{% block body %}
+    <div class="homebg">
+        <div>
+            <p class="slogan">Hi, I'm Essie, your English tutor. My mission is to help you master English with confidence and ease!</p>
+
+            {% if not is_authenticated %} 
+            <a href="/signup" class="startBtn">Register</a>
+            {% else %}
+            <a href="#contact" class="startBtn">Book a session</a>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+{% endblock %}
+

@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Edit Review
+{% endblock %}
+
+{% block body %}
+<div class="centr">
+    <div class="centrr editEl">
+        <h3>Edit Post</h3>
+        <form action="/edit/{{ post.id }}" method="post">
+            <div>
+                <textarea id="postcontent" name="postcontent" required>{{ post.content }}</textarea>
+            </div>
+            <button type="submit" class="btn btn-success">Update Post</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

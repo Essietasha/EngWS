@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+
+{% block title %}
+    Login
+{% endblock %}
+
+
+{% block body %}
+    <div class="signupFlex">
+        <div class="signupLeftDiv">
+            <div>
+                <p>Live Classes</p>
+                <p>IELTS Preparation</p>
+                <p>Personal Tutoring</p>
+                <p>English Skills</p>
+                <p>Grammar</p>
+                <p>Vocabulary</p>
+                <p>Business English</p>
+                <p>Learning styles</p>
+                <p>English Levels</p>
+                <p>General English</p>
+                <p>Topics</p>
+                <p>Resources</p>
+            </div>
+        </div>
+        <div class="signupRightDiv">
+            <h3>Log In</h3>
+            <form action="/login" method="post">
+                <div class="mb-3">
+                    <label for="namelb" class="form-label">Username</label>
+                    <input type="text" class="form-control " id="namelb" name="name" autocomplete="off" autofocus>
+                </div>
+                <div class="mb-3">
+                    <label for="passwordlb" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="passwordlb" name="password" autocomplete="off">
+                </div>
+                <button type="submit" class="btn btn-info">Login</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+{% endblock %}

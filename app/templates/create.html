@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+
+{% block title %}
+    Create
+{% endblock %}
+
+
+{% block body %}
+<div class="centr">
+    <div class="centrr">
+        <h3>Write a Review</h3>
+        <form action="/create" method="post">
+            <div class="mb-3">
+                <textarea  name="postcontent" type="text" class="form-control writeReview" autocomplete="off" autofocus placeholder="Content"> </textarea>
+            </div>
+            <button type="submit" class="btn btn-info">Post</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

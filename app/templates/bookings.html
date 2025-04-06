@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+
+{% block title %}
+    Book a Session
+{% endblock %}
+
+{% block body %}
+
+<h2>Book a Trial Lesson</h2>
+<form method="POST">
+    <label>Enter Name:</label>
+    <input type="text" name="name" required>
+
+    <label>Email Address:</label>
+    <input type="email" name="email" required>
+
+    <label>Select a Date:</label>
+    <input type="date" name="date" required>
+
+    <label>Select a Time:</label>
+    <input type="time" name="time" required>
+
+    <button type="submit">Book Trial Lesson</button>
+</form>
+{% endblock %}

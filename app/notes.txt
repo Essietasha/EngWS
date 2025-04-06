@@ -43,7 +43,7 @@ Migration - Run Database Migrations- Update models/column/table in database
             migrate = Migrate(app, db)
             from app import routes, models
     Generate a Migration Script - Run migration in venv; Run:
-        flask db init
+        flask db init - FIRST TIME ONLY
         flask db migrate -m "Add migrations comment"
         flask db upgrade
 

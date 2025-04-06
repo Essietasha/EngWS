@@ -1,8 +1,9 @@
-from flask import render_template, redirect, request, session, flash, jsonify
+from flask import render_template, redirect, url_for, request, session, flash, jsonify
 from werkzeug.security import check_password_hash, generate_password_hash
 from app import app, db
-from app.models import User, Post, Like, Comment
+from app.models import User, Post, Like, Comment, Trialbooking
 from app.helpers import login_required, error
+from app.email import send_confirmation_email
 from flask import make_response
 import re
 import bleach
@@ -427,3 +428,22 @@ def delete_user(user_id):
             db.session.rollback()
             flash("An error occurred while deleting the user.", "danger")
             return redirect("/creators")
+
+
+@app.route('/bookings', methods=['GET', 'POST'])
+def trial_lesson():
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        date = request.form['date']
+        time = request.form['time']
+
+        booking = Trialbooking(name=name, email=email, date=date, time=time)
+        db.session.add(booking)
+        db.session.commit()
+
+        send_confirmation_email(email, date, time, name)
+        flash('Your trial lesson is booked! Please check your email for details.', 'success')
+        return redirect("/bookings")
+
+    return render_template('bookings.html')

@@ -946,6 +946,44 @@ footer{
 }
 
 
+//Bookings
+.bookings{
+    display: grid;
+    grid-template-columns: 30% 70%;
+    min-height: 90vh;
+
+    .infos{
+        padding: 4rem 2rem;
+        background-color: $background-color;
+
+        h4{
+            margin-bottom: 2rem;
+        }
+
+        li{
+            margin-left: -2rem;
+            list-style: none;
+            line-height: 3rem;
+            color: gainsboro;
+            font-size: 1.4rem;
+        }
+    }
+
+    .trialsession{
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 4rem 8rem 1rem 8rem;
+        background: linear-gradient(to bottom, #ffffff, #e0f7fa);
+        color: #111;
+
+        h2{
+            padding-bottom: 2rem;
+        }
+    }
+}
+
+
 @keyframes homeSlide{
     from {
         transform: translateY(50%);

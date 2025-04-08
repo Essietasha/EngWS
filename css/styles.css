@@ -805,6 +805,37 @@ footer .testimonial .startBtn:hover {
   color: #fff;
 }
 
+.bookings {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  min-height: 90vh;
+}
+.bookings .infos {
+  padding: 4rem 2rem;
+  background-color: #0D7C66;
+}
+.bookings .infos h4 {
+  margin-bottom: 2rem;
+}
+.bookings .infos li {
+  margin-left: -2rem;
+  list-style: none;
+  line-height: 3rem;
+  color: gainsboro;
+  font-size: 1.4rem;
+}
+.bookings .trialsession {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 4rem 8rem 1rem 8rem;
+  background: linear-gradient(to bottom, #ffffff, #e0f7fa);
+  color: #111;
+}
+.bookings .trialsession h2 {
+  padding-bottom: 2rem;
+}
+
 @keyframes homeSlide {
   from {
     transform: translateY(50%);

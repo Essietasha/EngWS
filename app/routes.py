@@ -7,6 +7,7 @@ from app.email import send_confirmation_email
 from flask import make_response
 import re
 import bleach
+from datetime import datetime, timezone
 
 
 @app.after_request
@@ -434,15 +435,17 @@ def delete_user(user_id):
 def trial_lesson():
     if request.method == 'POST':
         name = request.form['name']
+        lastname = request.form['lastname']
         email = request.form['email']
         date = request.form['date']
         time = request.form['time']
-
-        booking = Trialbooking(name=name, email=email, date=date, time=time)
+        phone = request.form['phone']
+        
+        booking = Trialbooking(name=name, lastname=lastname, email=email, date=date, time=time, phone=phone, created_at=datetime.now(timezone.utc))
         db.session.add(booking)
         db.session.commit()
 
-        send_confirmation_email(email, date, time, name)
+        send_confirmation_email(email, name, lastname, date, time, phone, booking.created_at)
         flash('Your trial lesson is booked! Please check your email for details.', 'success')
         return redirect("/bookings")
 

@@ -47,6 +47,35 @@ Migration - Run Database Migrations- Update models/column/table in database
         flask db migrate -m "Add migrations comment"
         flask db upgrade
 
+
+STEPS To Recreate/Drop Database / Drop Tables Manually via Flask Shell
+    Drop All Tables
+        In venv: Run 
+            flask shell
+            from app import db
+            db.drop_all()
+
+    Recreate Database / If Using Flask Migrate
+    NOTE: Don't use shell for this
+        In venv: Run 
+            flask db migrate -m "Recreating the database"
+            flask db upgrade  ###### To Apply migrations
+
+            OR
+            In venv: Run  
+            flask shell
+            from app import db OR 
+            db.create_all()
+
+        DELETE ENTIRE Database: Care!!!
+            Delete the blogpost.db file in instance folder
+            In Venv Run: Remove-Item -Recurse -Force migrations ORRR Run: rm -r migrations To Remove migrations folder
+            Then in Venv Run:
+                    flask db init
+                    flask db migrate -m "Recreating database"
+                    flask db upgrade
+
+
 Sass Rerun: sass --watch app/static/scss:app/static/css
 
 Generating SECRET_KEY: Steps to Properly Manage Flask Secret Key:
@@ -116,27 +145,6 @@ Key changes/not necessary:
     Requirements.txt:
         To Create requirements.txt: Run pip freeze > requirements.txt
         To Install Dependencies: Run pip install -r requirements.txt
-
-
-STEPS To Recreate/Drop Database / Drop Tables Manually via Flask Shell
-    Drop All Tables
-        In venv: Run 
-            flask shell
-            from app import db
-            db.drop_all()
-
-    Recreate Database / If Using Flask Migrate
-    NOTE: Don't use shell for this
-        In venv: Run 
-            flask db migrate -m "Recreating the database"
-            flask db upgrade  ###### To Apply migrations
-
-            OR
-            In venv: Run  
-            flask shell
-            from app import db OR 
-            db.create_all()
-
 
 
 CSFR AND XSS Malware Attack Protection

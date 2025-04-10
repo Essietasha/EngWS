@@ -828,11 +828,22 @@ footer .testimonial .startBtn:hover {
   justify-content: center;
   align-items: flex-start;
   padding: 4rem 8rem 1rem 8rem;
-  background: linear-gradient(to bottom, #ffffff, #e0f7fa);
-  color: #111;
+  background-color: #2c2f33;
+  color: #f8f9fa;
 }
 .bookings .trialsession h2 {
   padding-bottom: 2rem;
+}
+.bookings .trialsession label {
+  font-weight: bold;
+}
+.bookings .trialsession input, .bookings .trialsession textarea {
+  background-color: gainsboro;
+  color: #111;
+  border: 1px solid #444;
+}
+.bookings .trialsession button {
+  margin-top: 1rem;
 }
 
 @keyframes homeSlide {
@@ -1116,6 +1127,23 @@ footer .testimonial .startBtn:hover {
     width: 100%;
     object-fit: cover;
     border-top-left-radius: 2rem;
+  }
+  .bookings {
+    display: block;
+    min-height: 90vh;
+  }
+  .bookings .infos {
+    display: none;
+  }
+  .bookings .trialsession {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 4rem 2rem 1rem 2rem;
+  }
+  .bookings .trialsession button {
+    margin-top: 1rem;
+    width: 100%;
   }
 }
 

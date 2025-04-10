@@ -440,6 +440,40 @@ def trial_lesson():
         date = request.form['date']
         time = request.form['time']
         phone = request.form['phone']
+
+        if not name or not lastname:
+            flash("Name and Last name are required.", "danger")
+            return redirect("/bookings")
+        
+        if not email or not re.match(r"[^@]+@[^@]+\.[^@]+", email):
+            flash("Invalid email address.", "danger")
+            return redirect("/bookings")
+        
+        if (phone.startswith('+') and not phone[1:].isdigit()) or (not phone.startswith('+') and not phone.isdigit()) or len(phone) < 7:
+            flash("Phone number must be numeric and at least 7 digits long.", "danger")
+            return redirect("/bookings")
+
+        try:
+            name = sanitize_input(validate_input(name))
+            lastname = sanitize_input(validate_input(lastname))
+            email = sanitize_input(validate_input(email))
+            phone = sanitize_input(validate_input(phone))
+        except Exception as e:
+            flash(str(e), "danger")
+            return redirect("/bookings")
+
+        # Past date Logic
+        # Combine date and time strings into one datetime object
+        try:
+            selected_datetime = datetime.strptime(f"{date} {time}", "%Y-%m-%d %H:%M")
+            selected_datetime = selected_datetime.replace(tzinfo=timezone.utc)
+        except ValueError:
+            flash("No valid date or time provided.", "error")
+            return redirect(request.referrer)
+        now = datetime.now(timezone.utc)
+        if selected_datetime < now:
+            flash("You cannot book a time in the past.", "error")
+            return redirect(request.referrer)
         
         booking = Trialbooking(name=name, lastname=lastname, email=email, date=date, time=time, phone=phone, created_at=datetime.now(timezone.utc))
         db.session.add(booking)

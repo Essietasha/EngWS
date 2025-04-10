@@ -59,3 +59,5 @@ Booking Confirmation Date: {created_date}
 )
     mail.send(admin_msg)
 
+
+

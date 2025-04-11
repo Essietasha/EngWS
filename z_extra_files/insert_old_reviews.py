@@ -14,14 +14,13 @@ with app.app_context():
             # Convert the string date_posted to a datetime object
             date_posted = datetime.fromisoformat(review["date_posted"])
 
-            # Create a new post (review)
             post = Post(
                 content=review["content"],
                 date_posted=date_posted, 
                 creator_id=user.id,
                 creator_name=user.username
             )
-
+            
             db.session.add(post)
 
     db.session.commit()

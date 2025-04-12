@@ -121,6 +121,7 @@ Hosting on Pythoneverwhere
         Run python3 -m venv venv
         Run source venv/bin/activate
 
+
     8. Run pip install flask
        Run pip install -r requirements.txt
     9. Go to Web. Add a new Web App.
@@ -134,6 +135,19 @@ Hosting on Pythoneverwhere
             sys.path.append(path)
         from run import app as application
     11. Set the Working Directory and Source Code in Web App e.g /home/essietasha/Techive
+
+
+    12. DEBUG ERRORS:
+        In Venv, Find out the full path of your venv. Run: echo $VIRTUAL_ENV
+        You should see sth like: /home/englishwithessie/Master_English_With_Essie/venv PASTE THIS INTO THE VENV PART OF THE WEBAPP Page
+        Save + Reload the Web App
+
+        If u got an error like: This virtualenv seems to have the wrong Python version (3.13 instead of 3.10):
+            Delete your current venv. NOT IN VENV(deactivate venv), In Bash(cd into project folder) Run: rm -rf venv
+            Create a new virtualenv with Python 3.10 still in bash, Run: python3.10 -m venv venv
+            Activate the new venv, Run: source venv/bin/activate
+            Install all requirements, Run: pip install -r requirements.txt
+            Reload the Web App
 
 
 Key changes/not necessary:

@@ -25,7 +25,9 @@ Meeting ID: 847 3177 8227
 Passcode: 125
 Looking forward to meeting you!
 
-For more enquiries: essietasharae@gmail.com
+For more enquiries: 
+Mailto: essietasharae@gmail.com
+Leave a message: +16062630996
 
 Warm regards,  
 Essie

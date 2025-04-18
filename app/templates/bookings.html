@@ -61,8 +61,15 @@
                 <div class="col-12">
                   <button type="submit" class="btn btn-success">Book Trial Lesson</button>
                 </div>
-            </form>
+          </form>
 
+          <div>
+              {% if is_admin %}
+                <div>
+                  <button class="btn btn-dark"> <a href="/allbookings" class="allbookbtn"> ALL BOOKINGS</a></button>
+                </div>
+              {% endif %}
+          </div>
         </div>
     </div>
 </div>

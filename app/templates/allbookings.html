@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+
+{% block title %}
+    Book a Session
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="booking-table">
+        {% if is_admin %}
+            {% for booking in trialbooking %}
+                <div class="booking-card">
+                    <div>Name: {{ booking.name }} {{ booking.lastname }}</div>
+                    <div>Email: {{ booking.email }}</div>
+                    <div>Date: {{ booking.date }}</div>
+                    <div>Time: {{ booking.time }}</div>
+                    <div>Phone: {{ booking.phone }}</div>
+                    <div>Created At: {{ booking.created_at }}</div>
+                    {% if is_admin %}
+                    <form action="/delete_booking/{{ booking.id }}" method="post" class="deleteBookingBtn">
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                    {% endif %}
+                </div>
+
+            {% endfor %}
+        {% endif %}
+      </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+{% endblock %}

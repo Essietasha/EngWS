@@ -74,6 +74,16 @@ def grammar():
 def skills():
     return render_template("skills.html")
 
+@app.route("/allbookings")
+@login_required
+def allbookings():
+    users = User.query.all()
+    trialbooking = Trialbooking.query.order_by(Trialbooking.created_at.desc()).all()
+    cu_id = session.get("user_id")
+    current_user = User.query.filter_by(id=cu_id).first() if cu_id else None
+    is_admin = current_user.is_admin if current_user else False
+    return render_template("allbookings.html", users=users, is_admin=is_admin, trialbooking=trialbooking, current_user=current_user)
+
 
 @app.route("/allposts")
 @login_required
@@ -432,7 +442,13 @@ def delete_user(user_id):
 
 
 @app.route('/bookings', methods=['GET', 'POST'])
+@login_required
 def trial_lesson():
+    users = User.query.all()
+    cu_id = session.get("user_id")
+    current_user = User.query.filter_by(id=cu_id).first() if cu_id else None
+    is_admin = current_user.is_admin if current_user else False
+
     if request.method == 'POST':
         name = request.form['name']
         lastname = request.form['lastname']
@@ -483,4 +499,28 @@ def trial_lesson():
         flash('Your trial lesson is booked! Please check your email for details.', 'success')
         return redirect("/bookings")
 
-    return render_template('bookings.html')
+    return render_template('bookings.html', users=users, is_admin=is_admin)
+
+
+@app.route('/delete_booking/<int:booking_id>', methods=['GET', 'POST'])
+@login_required
+def delete_booking(booking_id):
+    if request.method == "POST":
+        current_user = User.query.get(session.get("user_id"))
+
+        if not current_user.is_admin:
+            flash("Unauthorized action!", "danger")
+            return redirect("/allbookings")
+
+        booking_to_delete = Trialbooking.query.get_or_404(booking_id)
+
+        try:
+            db.session.delete(booking_to_delete)
+            db.session.commit()
+
+            flash(f"Bookinf for {booking_to_delete.name} has been deleted.", "success")
+            return redirect("/allbookings")
+        except Exception as e:
+            db.session.rollback()
+            flash("An error occurred while deleting the user.", "danger")
+            return redirect("/allbookings")

@@ -846,6 +846,31 @@ footer .testimonial .startBtn:hover {
   margin-top: 1rem;
 }
 
+.booking-table {
+  background-color: #000000;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: 10px;
+}
+
+.booking-card {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.allbookbtn {
+  color: #fff;
+  text-decoration: none;
+}
+
+.deleteBookingBtn {
+  padding-top: 10px;
+}
+
 @keyframes homeSlide {
   from {
     transform: translateY(50%);
